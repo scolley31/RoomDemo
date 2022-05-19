@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var inputUser: UserEntity? = null
     private var defaultUser: UserEntity = UserEntity(
         name = "default",
-        age = Random.nextInt(1, 20)
+        age = 0
     )
 
     private lateinit var db: UserDatabase
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var deleteButton: Button
     private lateinit var queueButton: Button
     private lateinit var clearButton: Button
+    private lateinit var updateButton: Button
     private lateinit var tvUsers: TextView
     private lateinit var etInputName: EditText
     private lateinit var etInputId: EditText
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         deleteButton = findViewById(R.id.bt_delete_room)
         clearButton = findViewById(R.id.bt_clear_room)
         queueButton = findViewById(R.id.bt_queue_room)
+        updateButton = findViewById(R.id.bt_update_room)
     }
 
     private fun initListener() {
@@ -81,6 +83,11 @@ class MainActivity : AppCompatActivity() {
 
         clearButton.setOnClickListener{
             clearAllUsers()
+            updateUI(usersToString(queueAllUsers()))
+        }
+
+        updateButton.setOnClickListener{
+            updateUser()
             updateUI(usersToString(queueAllUsers()))
         }
 
@@ -135,6 +142,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun clearAllUsers() {
         dao.clear()
+    }
+
+    private fun updateUser() {
+        inputUser = UserEntity(
+            id = inputId,
+            name = inputName
+        )
+        dao.updateUsers(inputUser ?: defaultUser)
     }
 
     private fun queueAllUsers(): List<UserEntity>? {

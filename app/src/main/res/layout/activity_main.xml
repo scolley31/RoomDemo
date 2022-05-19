@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/bt_update_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="update"
+        app:layout_constraintEnd_toEndOf="@+id/bt_delete_room"
+        app:layout_constraintTop_toBottomOf="@+id/bt_insert_room" />
+
     <EditText
         android:id="@+id/et_input_id"
         android:layout_width="0dp"

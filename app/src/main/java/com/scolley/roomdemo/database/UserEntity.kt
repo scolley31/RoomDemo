@@ -16,6 +16,7 @@ data class UserEntity(
     var age: Int = 0,
 
     ) {
+
     override fun toString(): String {
         return "id = $id, name = $name, age = $age"
     }
